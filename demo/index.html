@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagination demo</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="../node_modules/angular/angular.min.js"></script>
+  <script src="../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="../node_modules/ly-table/ly-table.js"></script>
+  <script src="../ly-pagination.js"></script>
+  <script src="demo.js"></script>
+</head>
+<body class="container" ng-controller="Demo">
+
+  <ly-table data="data" columns="columns" init="postInit(ele)" table-class="table-hover"></ly-table>
+  <ly-pagination total-records="totalRecords"
+                 page-size="pageSize"
+                 auto-reset="autoReset"
+                 page-display-number="pageDisplayNumber"
+  >
+  </ly-pagination>
+
+</body>
+</html>
