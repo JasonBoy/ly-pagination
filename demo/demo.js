@@ -25,7 +25,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         }
       ];
       var temps = [];
-      for(var i = 1; i< 88; i++) {
+      for(var i = 1; i< 133; i++) {
         var temp = {
           name: 'jason',
           age: i,
@@ -34,12 +34,13 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         temps.push(temp);
       }
       $scope.data = temps.slice(0, 10);
-
+      $scope.prevText = 'prev';
+      $scope.nextText = 'next';
       $scope.totalRecords = temps.length;
-      $scope.pageSize = 10;
+      $scope.pageSize = 5;
       $scope.currentPage = 1;
       $scope.autoReset = true;
-      $scope.pageDisplayNumber = 10;
+      $scope.pageDisplayNumber = 5;
       $scope.$broadcast('resetPagination', $scope.totalRecords);
       $scope.$on('pageChange', function (e, currentPage) {
         $scope.currentPage = currentPage;
@@ -50,6 +51,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
       $scope.postInit = function(ele) {
         console.log('postInit');
       };
+
       function simpleFormatter(fieldData, rowData, columnDefinition) {
         return fieldData;
       }

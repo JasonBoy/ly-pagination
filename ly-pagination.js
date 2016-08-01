@@ -9,55 +9,61 @@
   var pagination = angular.module('lyPagination', []);
   var template = '<ul class="pagination ly-pagination">' +
       '<li>' +
-        '<a href="" ng-click="goto(1)">' +
-          '<span aria-hidden="true" ng-bind-html="trustHtml(firstText)"></span>' +
-        '</a>' +
+      '<a href="" ng-click="goto(1)">' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(firstText)"></span>' +
+      '</a>' +
       '</li>' +
-        '<li>' +
-          '<a href="" aria-label="Previous" ng-click="prev()">' +
-            '<span aria-hidden="true" ng-bind-html="trustHtml(prevText)"></span>' +
-          '</a>' +
-        '</li>' +
-        '<li ng-class="{active: currentPage === p}" ng-repeat="p in pages">' +
-          '<a href="" ng-click="goto(p)">{{ p }}</a>' +
-        '</li>' +
-        '<li ng-show="outOfRange"><a href="">...</a></li>' +
-        '<li ng-show="outOfRange">' +
-          '<a href="" ng-click="goto(totalPages)">{{ totalPages }}</a>' +
-        '</li>' +
-        '<li>' +
-          '<a href="" aria-label="Next" ng-click="next()">' +
-            '<span aria-hidden="true" ng-bind-html="trustHtml(nextText)"></span>' +
-          '</a>' +
-        '</li>' +
-        '<li>' +
-          '<a href="" ng-click="goto(totalPages)">' +
-            '<span aria-hidden="true" ng-bind-html="trustHtml(lastText)"></span>' +
-          '</a>' +
-        '</li>' +
+      '<li>' +
+      '<a href="" aria-label="Previous" ng-click="prev()">' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(prevText)"></span>' +
+      '</a>' +
+      '</li>' +
+      '<li ng-class="{active: currentPage === p}" ng-repeat="p in pages">' +
+      '<a href="" ng-click="goto(p)">{{ p }}</a>' +
+      '</li>' +
+      '<li ng-show="outOfRange"><a href="">...</a></li>' +
+      '<li ng-show="outOfRange">' +
+      '<a href="" ng-click="goto(totalPages)">{{ totalPages }}</a>' +
+      '</li>' +
+      '<li>' +
+      '<a href="" aria-label="Next" ng-click="next()">' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(nextText)"></span>' +
+      '</a>' +
+      '</li>' +
+      '<li>' +
+      '<a href="" ng-click="goto(totalPages)">' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(lastText)"></span>' +
+      '</a>' +
+      '</li>' +
       '</ul>';
 
   pagination.directive('lyPagination', function () {
     return {
       restrict: 'EA',
       scope: {
-        totalRecords: '=',
-        pageSize: '=',
-        pageDisplayNumber: '=',
-        autoReset: '='
+        totalRecords: '=', //total records number
+        pageSize: '=', //maximum records of every page
+        pageDisplayNumber: '=', //number of pages to display in the pagination list
+        autoReset: '=', //init the pagination at the beginning,
+        // usually you should broadcast the event to notify the pagination to initialize
+        // if your data is loaded by ajax
+        prevText: '@', //set your custom text, html tag supported
+        nextText: '@',
+        firstText: '@',
+        lastText: '@'
       },
       replace: true,
       template: template,
       controller: ['$scope', '$sce', function ($scope, $sce) {
         var ps = $scope.pageSize ? $scope.pageSize : 10;
         var leftPageNumber = $scope.pageDisplayNumber ? $scope.pageDisplayNumber : 5;
-        $scope.prevText = '&lt;';
-        $scope.nextText = '&gt;';
-        $scope.firstText = '&laquo;';
-        $scope.lastText = '&raquo;';
+        $scope.prevText || ($scope.prevText = '&lt;');
+        $scope.nextText || ($scope.nextText = '&gt;');
+        $scope.firstText || ($scope.firstText = '&laquo;');
+        $scope.lastText || ($scope.lastText = '&raquo;');
         $scope.pages = [];
 
-        $scope.trustHtml = function(input) {
+        $scope.trustHtml = function (input) {
           return $sce.trustAsHtml(input);
         };
         $scope.prev = function () {
@@ -77,7 +83,6 @@
         };
 
         $scope.$on('resetPagination', function (event, totalRecords) {
-          console.log('xxx');
           $scope.totalRecords = totalRecords;
           recal();
         });
@@ -86,7 +91,6 @@
 
         function recal() {
           $scope.totalPages = Math.ceil($scope.totalRecords / ps);
-          console.log('recal total pages: %s', $scope.totalPages);
           leftPageNumber = Math.min(leftPageNumber, $scope.totalPages);
           $scope.currentPage = 1;
           genPages();
@@ -103,7 +107,7 @@
           var comparator = $scope.currentPage > 2 ? middle : leftPageNumber;
           for (var i = -1 * (middle - 1); i < comparator; i++) {
             var t = $scope.currentPage + i;
-            if(t <= 0) continue;
+            if (t <= 0) continue;
             if (t > total) break;
             $scope.pages.push(t);
           }

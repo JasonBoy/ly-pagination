@@ -12,12 +12,13 @@
 </head>
 <body class="container" ng-controller="Demo">
 
-  <ly-table data="data" columns="columns" init="postInit(ele)" table-class="table-hover"></ly-table>
+  <ly-table data="data" columns="columns" table-class="table-hover"></ly-table>
   <ly-pagination total-records="totalRecords"
                  page-size="pageSize"
                  auto-reset="autoReset"
                  page-display-number="pageDisplayNumber"
-  >
+                 prev-text="{{ prevText }}"
+                 next-text="{{ nextText }}">
   </ly-pagination>
 
 </body>
