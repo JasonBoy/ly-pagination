@@ -15,6 +15,7 @@ Then in your page, add the tag in your html:
                auto-reset="autoReset"
 </ly-pagination>
 ```
+[![ly-pagination-ui](https://github.com/JasonBoy/ly-pagination/blob/master/demo/img.png)](https://github.com/JasonBoy/ly-pagination/blob/master/demo/img.png)
 
 ### Options
 
