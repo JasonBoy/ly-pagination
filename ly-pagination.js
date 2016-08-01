@@ -96,7 +96,8 @@
         }
 
         function genPages(reset) {
-          $scope.$emit('pageChange', $scope.currentPage);
+          reset = !!reset;
+          reset || $scope.$emit('pageChange', $scope.currentPage);
           var pages = $scope.pages;
           if (!reset && pages.length > 0 && pages.indexOf($scope.currentPage) >= 0)
             return;
