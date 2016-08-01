@@ -108,7 +108,7 @@
           for (var i = -1 * (middle - 1); i < comparator; i++) {
             var t = $scope.currentPage + i;
             if (t <= 0) continue;
-            if (t > total) break;
+            if (t > total || $scope.pages.length > leftPageNumber) break;
             $scope.pages.push(t);
           }
           $scope.outOfRange = !!($scope.pages[$scope.pages.length - 1] < $scope.totalPages
