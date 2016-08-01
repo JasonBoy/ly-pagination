@@ -36,7 +36,8 @@ Then in your page, add the tag in your html:
   
 ### Demo
 
-See it in `demo` dir
+`npm install`,
+Then open `index.html` in `demo` dir
   
 ### License
 
