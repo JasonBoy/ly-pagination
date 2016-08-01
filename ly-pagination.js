@@ -84,27 +84,27 @@
 
         $scope.$on('resetPagination', function (event, totalRecords) {
           $scope.totalRecords = totalRecords;
-          recal();
+          recal(true);
         });
 
         $scope.autoReset && recal();
 
-        function recal() {
+        function recal(reset) {
           $scope.totalPages = Math.ceil($scope.totalRecords / ps);
           leftPageNumber = Math.min(leftPageNumber, $scope.totalPages);
           $scope.currentPage = 1;
-          genPages();
+          genPages(reset);
         }
 
-        function genPages() {
+        function genPages(reset) {
           $scope.$emit('pageChange', $scope.currentPage);
           var pages = $scope.pages;
-          if (pages.length > 0 && pages.indexOf($scope.currentPage) >= 0)
+          if (!reset && pages.length > 0 && pages.indexOf($scope.currentPage) >= 0)
             return;
           $scope.pages = [];
           var total = $scope.totalPages;
           var middle = Math.ceil(leftPageNumber / 2);
-          var comparator = $scope.currentPage > 2 ? middle : leftPageNumber;
+          var comparator = $scope.currentPage >= middle ? middle : leftPageNumber;
           for (var i = -1 * (middle - 1); i < comparator; i++) {
             var t = $scope.currentPage + i;
             if (t <= 0) continue;
