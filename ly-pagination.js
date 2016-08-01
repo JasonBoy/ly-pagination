@@ -91,7 +91,6 @@
 
         function recal(reset) {
           $scope.totalPages = Math.ceil($scope.totalRecords / ps);
-          leftPageNumber = Math.min(leftPageNumber, $scope.totalPages);
           $scope.currentPage = 1;
           genPages(reset);
         }
