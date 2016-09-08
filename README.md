@@ -27,6 +27,7 @@ Then in your page, add the tag in your html:
 **nextText**: '@'  
 **firstText**: '@'  
 **lastText**: '@'
+**hideFirst**: '=', hide the 1-2 page button when user is in large pages ( which is > 3), default: false
 
 ### Events
 
@@ -34,12 +35,12 @@ Then in your page, add the tag in your html:
 **resetPagination**: you should `$broadcast` this event to notify the directive to reset the pagination ui,
  if the `autoReset` is `false`(default), you also need to broadcast this for the first time(after you load async data),
  otherwise it will initialize the ui at the beginning without emit this event.  
-  
+
 ### Demo
 
 `npm install`,
 Then open `index.html` in `demo` dir
-  
+
 ### License
 
 **MIT**

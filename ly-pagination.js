@@ -18,6 +18,13 @@
       '<span aria-hidden="true" ng-bind-html="trustHtml(prevText)"></span>' +
       '</a>' +
       '</li>' +
+      '<li ng-show="inTheEnd">' +
+      '<a href="" ng-click="goto(1)">1</a>' +
+      '</li>' +
+      '<li ng-show="inTheEnd">' +
+      '<a href="" ng-click="goto(2)">2</a>' +
+      '</li>' +
+      '<li ng-show="inTheEnd"><a href="">...</a></li>' +
       '<li ng-class="{active: currentPage === p}" ng-repeat="p in pages">' +
       '<a href="" ng-click="goto(p)">{{ p }}</a>' +
       '</li>' +
@@ -50,7 +57,8 @@
         prevText: '@', //set your custom text, html tag supported
         nextText: '@',
         firstText: '@',
-        lastText: '@'
+        lastText: '@',
+        hideFirst: '=' //hide the 1-2 page button when user is in large pages ( which is > 3)
       },
       replace: true,
       template: template,
@@ -108,7 +116,7 @@
           for (var i = -1 * (middle - 1); i < comparator; i++) {
             var t = $scope.currentPage + i;
             if (t <= 0) continue;
-            if (t > total || $scope.pages.length > leftPageNumber) break;
+            if (t > total || $scope.pages.length >= leftPageNumber) break;
             $scope.pages.push(t);
           }
           $scope.outOfRange = !!($scope.pages[$scope.pages.length - 1] < $scope.totalPages
@@ -121,6 +129,9 @@
                 tempPages.unshift(tempPages[0] - 1);
               }
             }
+          }
+          if (!$scope.hideFirst) {
+            $scope.inTheEnd = !!($scope.currentPage > 3);
           }
         }
       }]

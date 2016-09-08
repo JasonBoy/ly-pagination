@@ -40,6 +40,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
       $scope.pageSize = 5;
       $scope.currentPage = 1;
       $scope.autoReset = true;
+      $scope.hideFirst = false;
       $scope.pageDisplayNumber = 5;
       $scope.$broadcast('resetPagination', $scope.totalRecords);
       $scope.$on('pageChange', function (e, currentPage) {
@@ -56,4 +57,3 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         return fieldData;
       }
     });
-
