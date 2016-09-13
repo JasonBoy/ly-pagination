@@ -34,7 +34,8 @@ Then in your page, add the tag in your html:
 **pageChange**: the directive will `$emit` this event when user click on different a page  
 **resetPagination**: you should `$broadcast` this event to notify the directive to reset the pagination ui,
  if the `autoReset` is `false`(default), you also need to broadcast this for the first time(after you load async data),
- otherwise it will initialize the ui at the beginning without emit this event.  
+ otherwise it will initialize the ui at the beginning without emit this event.
+  `$scope.$broadcast('resetPagination', totalRecords, newPageSize);`
 
 ### Demo
 

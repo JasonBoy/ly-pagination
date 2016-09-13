@@ -63,7 +63,6 @@
       replace: true,
       template: template,
       controller: ['$scope', '$sce', function ($scope, $sce) {
-        var ps = $scope.pageSize ? $scope.pageSize : 10;
         var leftPageNumber = $scope.pageDisplayNumber ? $scope.pageDisplayNumber : 5;
         $scope.prevText || ($scope.prevText = '&lt;');
         $scope.nextText || ($scope.nextText = '&gt;');
@@ -90,14 +89,16 @@
           genPages();
         };
 
-        $scope.$on('resetPagination', function (event, totalRecords) {
+        $scope.$on('resetPagination', function (event, totalRecords, pageSize) {
           $scope.totalRecords = totalRecords;
-          recal(true);
+          pageSize = pageSize || event.targetScope.pageSize;
+          recal(true, pageSize);
         });
 
         $scope.autoReset && recal();
 
-        function recal(reset) {
+        function recal(reset, pageSize) {
+          var ps = pageSize || ($scope.pageSize ? $scope.pageSize : 10);
           $scope.totalPages = Math.ceil($scope.totalRecords / ps);
           $scope.currentPage = 1;
           genPages(reset);

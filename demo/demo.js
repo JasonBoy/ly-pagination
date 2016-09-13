@@ -1,6 +1,6 @@
 
 angular.module('demo', ['lyTable', 'lyPagination'])
-    .controller('Demo', function($scope) {
+    .controller('Demo', function($scope, $timeout) {
       $scope.columns = [
         {
           field: 'name',
@@ -42,7 +42,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
       $scope.autoReset = true;
       $scope.hideFirst = false;
       $scope.pageDisplayNumber = 5;
-      $scope.$broadcast('resetPagination', $scope.totalRecords);
+      // $scope.$broadcast('resetPagination', $scope.totalRecords);
       $scope.$on('pageChange', function (e, currentPage) {
         $scope.currentPage = currentPage;
         var startIndex = (currentPage - 1) * $scope.pageSize;
@@ -52,6 +52,12 @@ angular.module('demo', ['lyTable', 'lyPagination'])
       $scope.postInit = function(ele) {
         console.log('postInit');
       };
+      // reset the pagination with different params
+      // $timeout(function () {
+      //   $scope.totalRecords = temps.length;
+      //   $scope.pageSize = 7;
+      //   $scope.$broadcast('resetPagination', $scope.totalRecords, $scope.pageSize);
+      // }, 3000);
 
       function simpleFormatter(fieldData, rowData, columnDefinition) {
         return fieldData;
