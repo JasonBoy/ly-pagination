@@ -108,14 +108,20 @@
           reset = !!reset;
           reset || $scope.$emit('pageChange', $scope.currentPage);
           var pages = $scope.pages;
-          if (!reset && pages.length > 0 && pages.indexOf($scope.currentPage) >= 0)
+          var cp = $scope.currentPage;
+          if (!reset
+              && pages.length > 0
+              && pages.indexOf(cp) >= 0
+              && pages[0] != cp
+              && pages[pages.length - 1] != cp) {
             return;
+          }
           $scope.pages = [];
           var total = $scope.totalPages;
           var middle = Math.ceil(leftPageNumber / 2);
-          var comparator = $scope.currentPage >= middle ? middle : leftPageNumber;
+          var comparator = cp >= middle ? middle : leftPageNumber;
           for (var i = -1 * (middle - 1); i < comparator; i++) {
-            var t = $scope.currentPage + i;
+            var t = cp + i;
             if (t <= 0) continue;
             if (t > total || $scope.pages.length >= leftPageNumber) break;
             $scope.pages.push(t);
@@ -132,7 +138,7 @@
             }
           }
           if (!$scope.hideFirst) {
-            $scope.inTheEnd = !!($scope.currentPage > 3);
+            $scope.inTheEnd = (cp > 3);
           }
         }
       }]
