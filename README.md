@@ -17,6 +17,22 @@ Then in your page, add the tag in your html:
 ```
 [![ly-pagination-ui](https://github.com/JasonBoy/ly-pagination/blob/master/demo/img.png)](https://github.com/JasonBoy/ly-pagination/blob/master/demo/img.png)
 
+### Global Config  
+With 1.0.10+, you can config the button text(first, previous, next, last) with the `lyPaginationConfigProvider` without passing your custom text to directive every time.
+
+```javascript
+angular.module('demo', ['lyPagination'])
+    .config(['lyPaginationConfigProvider', function(lyPaginationConfigProvider) {
+      lyPaginationConfigProvider.setCustomButtonText({
+        prevText: 'previous',
+        nextText: 'next',
+        firstText: 'first',
+        lastText: 'last'
+      });
+    }])
+    .controller('ctrl', function(){...});
+```
+
 ### Options
 
 **totalRecords**: '=', total number of your items  
