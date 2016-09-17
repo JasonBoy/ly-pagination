@@ -1,5 +1,11 @@
 
 angular.module('demo', ['lyTable', 'lyPagination'])
+    .config(['lyPaginationConfigProvider', function(lyPaginationConfigProvider) {
+      lyPaginationConfigProvider.setCustomButtonText({
+        prevText: 'previous',
+        nextText: 'next'
+      });
+    }])
     .controller('Demo', function($scope, $timeout) {
       $scope.columns = [
         {
@@ -34,8 +40,8 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         temps.push(temp);
       }
       $scope.data = temps.slice(0, 10);
-      $scope.prevText = 'prev';
-      $scope.nextText = 'next';
+      $scope.prevText = 'prevCustom';
+      $scope.nextText = 'nextCustom';
       $scope.totalRecords = temps.length;
       $scope.pageSize = 5;
       $scope.currentPage = 1;
