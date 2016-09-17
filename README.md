@@ -42,7 +42,7 @@ angular.module('demo', ['lyPagination'])
 **prevText**: '@', set your custom text, html tag supported  
 **nextText**: '@'  
 **firstText**: '@'  
-**lastText**: '@'
+**lastText**: '@'  
 **hideFirst**: '=', hide the 1-2 page button when user is in large pages ( which is > 3), default: false
 
 ### Events
