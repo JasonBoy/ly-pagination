@@ -44,6 +44,27 @@
       '</li>' +
       '</ul>';
 
+  pagination.provider('lyPaginationConfig', function () {
+    this.buttonTexts = {
+      prevText: '&lt;',
+      nextText: '&gt;',
+      firstText: '&laquo;',
+      lastText: '&raquo;'
+    };
+
+    this.setCustomButtonText = function(textObject) {
+      for(var key in textObject) {
+        if(textObject.hasOwnProperty(key) && !!textObject[key]) {
+          this.buttonTexts[key] = textObject[key];
+        }
+      }
+    };
+
+    this.$get = function() {
+      return this;
+    };
+  });
+
   pagination.directive('lyPagination', function () {
     return {
       restrict: 'EA',
@@ -62,12 +83,13 @@
       },
       replace: true,
       template: template,
-      controller: ['$scope', '$sce', function ($scope, $sce) {
+      controller: ['$scope', '$sce', 'lyPaginationConfig', function ($scope, $sce, lyPaginationConfig) {
         var leftPageNumber = $scope.pageDisplayNumber ? $scope.pageDisplayNumber : 5;
-        $scope.prevText || ($scope.prevText = '&lt;');
-        $scope.nextText || ($scope.nextText = '&gt;');
-        $scope.firstText || ($scope.firstText = '&laquo;');
-        $scope.lastText || ($scope.lastText = '&raquo;');
+        var texts = lyPaginationConfig.buttonTexts;
+        $scope.prevText = $scope.prevText || texts.prevText;
+        $scope.nextText = $scope.nextText || texts.nextText;
+        $scope.firstText = $scope.firstText || texts.firstText;
+        $scope.lastText = $scope.lastText || texts.lastText;
         $scope.pages = [];
 
         $scope.trustHtml = function (input) {
