@@ -31,7 +31,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         }
       ];
       var temps = [];
-      for(var i = 1; i< 133; i++) {
+      for(var i = 1; i<= 101; i++) {
         var temp = {
           name: 'jason',
           age: i,
@@ -43,7 +43,7 @@ angular.module('demo', ['lyTable', 'lyPagination'])
       $scope.prevText = 'prevCustom';
       $scope.nextText = 'nextCustom';
       $scope.totalRecords = temps.length;
-      $scope.pageSize = 5;
+      $scope.pageSize = 10;
       $scope.currentPage = 1;
       $scope.autoReset = true;
       $scope.hideFirst = false;

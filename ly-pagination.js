@@ -21,7 +21,7 @@
       '<li ng-show="inTheEnd">' +
       '<a href="" ng-click="goto(1)">1</a>' +
       '</li>' +
-      '<li ng-show="inTheEnd">' +
+      '<li ng-show="inTheEnd && !hidePageTwo">' +
       '<a href="" ng-click="goto(2)">2</a>' +
       '</li>' +
       '<li ng-show="inTheEnd"><a href="">...</a></li>' +
@@ -159,8 +159,15 @@
               }
             }
           }
-          if (!$scope.hideFirst) {
-            $scope.inTheEnd = (cp > 3);
+          if (!$scope.hideFirst && cp > 3 && $scope.totalPages > leftPageNumber) {
+            if(tempPages[0] >= 2) {
+              $scope.inTheEnd = true;
+              $scope.hidePageTwo = tempPages[0] === 2;
+            } else {
+              $scope.inTheEnd = false;
+            }
+          } else {
+            $scope.inTheEnd = false;
           }
         }
       }]
