@@ -79,12 +79,14 @@
         nextText: '@',
         firstText: '@',
         lastText: '@',
+        name: '@', //will be prefixed to events to solve multi pagination within one page
         hideFirst: '=' //hide the 1-2 page button when user is in large pages ( which is > 3)
       },
       replace: true,
       template: template,
       controller: ['$scope', '$sce', 'lyPaginationConfig', function ($scope, $sce, lyPaginationConfig) {
         var leftPageNumber = $scope.pageDisplayNumber ? $scope.pageDisplayNumber : 5;
+        var _name = $scope.name || '';
         var texts = lyPaginationConfig.buttonTexts;
         $scope.prevText = $scope.prevText || texts.prevText;
         $scope.nextText = $scope.nextText || texts.nextText;
@@ -110,8 +112,11 @@
           $scope.currentPage = page;
           genPages();
         };
+        var _prefix = (_name ? (_name + '_') : '');
+        var _resetEvent =  _prefix + 'resetPagination';
+        var _changeEvent = _prefix + 'pageChange';
 
-        $scope.$on('resetPagination', function (event, totalRecords, pageSize) {
+        $scope.$on(_resetEvent, function (event, totalRecords, pageSize) {
           $scope.totalRecords = totalRecords;
           pageSize = pageSize || event.targetScope.pageSize;
           recal(true, pageSize);
@@ -128,7 +133,7 @@
 
         function genPages(reset) {
           reset = !!reset;
-          reset || $scope.$emit('pageChange', $scope.currentPage);
+          reset || $scope.$emit(_changeEvent, $scope.currentPage);
           var pages = $scope.pages;
           var cp = $scope.currentPage;
           if (!reset

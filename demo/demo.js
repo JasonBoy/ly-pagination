@@ -40,11 +40,15 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         temps.push(temp);
       }
       $scope.data = temps.slice(0, 10);
+      $scope.data2 = temps.slice(0, 10);
       $scope.prevText = 'prevCustom';
       $scope.nextText = 'nextCustom';
       $scope.totalRecords = temps.length;
-      $scope.pageSize = 10;
+      $scope.totalRecords2 = temps.length;
+      $scope.pageSize = 5;
+      $scope.pageSize2 = 5;
       $scope.currentPage = 1;
+      $scope.currentPage2 = 1;
       $scope.autoReset = true;
       $scope.hideFirst = false;
       $scope.pageDisplayNumber = 5;
@@ -54,6 +58,14 @@ angular.module('demo', ['lyTable', 'lyPagination'])
         var startIndex = (currentPage - 1) * $scope.pageSize;
         var endIndex = startIndex + $scope.pageSize;
         $scope.data = temps.slice(startIndex, endIndex);
+        console.log('page1');
+      });
+      $scope.$on('secondary_pageChange', function (e, currentPage) {
+        $scope.currentPage2 = currentPage;
+        var startIndex = (currentPage - 1) * $scope.pageSize2;
+        var endIndex = startIndex + $scope.pageSize2;
+        $scope.data2 = temps.slice(startIndex, endIndex);
+        console.log('page2');
       });
       $scope.postInit = function(ele) {
         console.log('postInit');
