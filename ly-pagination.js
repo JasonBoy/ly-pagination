@@ -138,7 +138,7 @@
           var cp = $scope.currentPage;
           if (!reset
               && pages.length > 0
-              && pages.indexOf(cp) >= 0
+              && includes(pages, cp)
               && pages[0] != cp
               && pages[pages.length - 1] != cp) {
             return;
@@ -154,7 +154,7 @@
             $scope.pages.push(t);
           }
           $scope.outOfRange = !!($scope.pages[$scope.pages.length - 1] < $scope.totalPages
-          || $scope.pages.indexOf($scope.totalPages) < 0);
+          || !includes($scope.pages, $scope.totalPages));
           var tempPages = $scope.pages;
           if (tempPages.length < leftPageNumber) {
             var remaining = leftPageNumber - tempPages.length;
@@ -178,4 +178,19 @@
       }]
     };
   });
+
+  /**
+   * simple Array.indexOf implementation, to support the freaking IE8
+   * @param array
+   * @param value
+   * @returns {boolean}
+   */
+  function includes(array, value) {
+    if(!array || array.length <= 0) return false;
+    for(var i = 0, length = array.length; i < length; i++) {
+      var item = array[i];
+      if(item == value) return true;
+    }
+    return false;
+  }
 })(window, window.angular);
