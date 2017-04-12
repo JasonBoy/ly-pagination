@@ -10,12 +10,12 @@
   var template = '<ul class="pagination ly-pagination">' +
       '<li>' +
       '<a href="" ng-click="goto(1)">' +
-      '<span aria-hidden="true" ng-bind-html="trustHtml(firstText)"></span>' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(firstTextFinal)"></span>' +
       '</a>' +
       '</li>' +
       '<li>' +
       '<a href="" aria-label="Previous" ng-click="prev()">' +
-      '<span aria-hidden="true" ng-bind-html="trustHtml(prevText)"></span>' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(prevTextFinal)"></span>' +
       '</a>' +
       '</li>' +
       '<li ng-show="inTheEnd">' +
@@ -34,12 +34,12 @@
       '</li>' +
       '<li>' +
       '<a href="" aria-label="Next" ng-click="next()">' +
-      '<span aria-hidden="true" ng-bind-html="trustHtml(nextText)"></span>' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(nextTextFinal)"></span>' +
       '</a>' +
       '</li>' +
       '<li>' +
       '<a href="" ng-click="goto(totalPages)">' +
-      '<span aria-hidden="true" ng-bind-html="trustHtml(lastText)"></span>' +
+      '<span aria-hidden="true" ng-bind-html="trustHtml(lastTextFinal)"></span>' +
       '</a>' +
       '</li>' +
       '</ul>';
@@ -88,10 +88,10 @@
         var leftPageNumber = $scope.pageDisplayNumber ? $scope.pageDisplayNumber : 5;
         var _name = $scope.name || '';
         var texts = lyPaginationConfig.buttonTexts;
-        $scope.prevText = $scope.prevText || texts.prevText;
-        $scope.nextText = $scope.nextText || texts.nextText;
-        $scope.firstText = $scope.firstText || texts.firstText;
-        $scope.lastText = $scope.lastText || texts.lastText;
+        $scope.prevTextFinal = $scope.prevText || texts.prevText;
+        $scope.nextTextFinal = $scope.nextText || texts.nextText;
+        $scope.firstTextFinal = $scope.firstText || texts.firstText;
+        $scope.lastTextFinal = $scope.lastText || texts.lastText;
         $scope.pages = [];
 
         $scope.trustHtml = function (input) {
