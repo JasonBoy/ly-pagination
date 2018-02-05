@@ -43,6 +43,7 @@ angular.module('demo', ['lyPagination'])
 **nextText**: '@'  
 **firstText**: '@'  
 **lastText**: '@'  
+**name**: '@', prefix for pagination events below, which makes it possible to use multiple paginiation in the same page    
 **hideFirst**: '=', hide the 1-2 page button when user is in large pages ( which is > 3), default: false
 
 ### Events
@@ -52,6 +53,8 @@ angular.module('demo', ['lyPagination'])
  if the `autoReset` is `false`(default), you also need to broadcast this for the first time(after you load async data),
  otherwise it will initialize the ui at the beginning without emit this event.
   `$scope.$broadcast('resetPagination', totalRecords, newPageSize);`
+  
+> if `name` option is passed, the events will be prefixed with the `${name}_`, e.g name="custom" -> `custom_pageChange` & `custom_resetPagination`
 
 ### Demo
 
