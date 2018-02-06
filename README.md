@@ -30,7 +30,9 @@ angular.module('demo', ['lyPagination'])
         lastText: 'last'
       });
     }])
-    .controller('ctrl', function(){...});
+    .controller('ctrl', function(){
+      //...
+    });
 ```
 
 ### Options
@@ -43,7 +45,7 @@ angular.module('demo', ['lyPagination'])
 **nextText**: '@'  
 **firstText**: '@'  
 **lastText**: '@'  
-**name**: '@', prefix for pagination events below, which makes it possible to use multiple paginiation in the same page    
+**name**: '@', prefix for pagination events below, which makes it possible to use multiple paginiations in the same page, see [demo](https://github.com/JasonBoy/ly-pagination#demo)    
 **hideFirst**: '=', hide the 1-2 page button when user is in large pages ( which is > 3), default: false
 
 ### Events
